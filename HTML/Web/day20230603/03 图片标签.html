@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body><!-- src资源路径:
+        1. 相对路径:一般访问站内资源时使用
+            - 图片和页面在同一目录: 直接写图片名
+            - 图片在页面的上级目录: ../图片名
+            - 图片在页面的下级目录: 文件夹名/图片名
+        2. 绝对路径: 一般访问站外资源,图片盗链,有找不到图片的风险
+
+        alt: 当图片不能正常显示时,显示的文本
+        title: 图片标题
+
+        width/height 两种赋值方式: 1.像素 2.上级元素的百分比
+        只设置宽度时,高度也会等比例缩放
+        -->
+<img src="aa.jpg" alt="这是一张美女图片">
+<img src="../b.jpg" title="这是标题" alt="">
+<img src="abc/c.jpg" width="50" alt="">
+<img src="abc/c.jpg" width="50%" alt="">
+<img src="https://cdn.tmooc.cn/bsfile//imgad///047cbbe2ae9d4cb2989b386f5086b551.jpg" alt=""></body>
+</html>
