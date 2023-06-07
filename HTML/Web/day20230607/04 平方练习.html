@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<input type="text" id="i1">
+<input type="button" value="平方" onclick="f()">
+<div>结果：<span></span></div>
+<script>
+    // function f() {
+    //     //得到文本框和div对象
+    //     let i = document.querySelector("#i1");
+    //     let d = document.querySelector("span");
+    //     //取出文本框的值并赋值给div
+    //     d.innerText = Number(i.value) * Number(i.value);
+    // }
+    function f() {
+        let i = document.querySelector("#i1");
+        let s = document.querySelector("span");
+        /* isNaN判断变量是否是NaN */
+        if (isNaN(i.value)) {
+            s.innerText = "请输入数字!";
+            return;
+        }
+        //s.innerText = i.value * i.value;
+        // 加入做其他运算,当两个字符串进行-*/运算时会自动转换为数值,但是+号不会
+        //第一种,强转
+        //s.innerText = i.value*1 + i.value*1;
+
+        //parseFloat()将字符串转成整数或小数
+        s.innerText = parseFloat(i.value) + parseFloat(i.value);
+    }
+</script>
+</body>
+</html>

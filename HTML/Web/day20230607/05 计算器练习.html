@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<input type="text" id="i1">
+<input type="text" id="i2">
+<input type="button" value="加" onclick="f(1)">
+<input type="button" value="减" onclick="f(2)">
+<input type="button" value="乘" onclick="f(3)">
+<input type="button" value="除" onclick="f(4)">
+<div>
+    结果:<span>0</span>
+</div>
+<script>
+    function f(x){
+        //得到页面中相关的元素对象
+        let i1 = document.querySelector("#i1");
+        let i2 = document.querySelector("#i2");
+        let s = document.querySelector("span");
+
+        // let i1 = document.querySelector("#i1");
+        // let i2 = document.querySelector("#i2");
+        // let sp = document.querySelector("span");
+        //判断输入的两个值是不是NaN
+        if (isNaN(i1.value) || isNaN(i2.value)) {
+            s.innerText = "输入错误!";
+            return;
+        }
+        var result;
+        switch (x) {
+            case 1: //加
+                s.innerText = i1.value*1 + i2.value*1;
+                break;
+            case 2: //减
+                s.innerText = i1.value - i2.value;
+                break;
+            case 3: //乘
+                s.innerText = i1.value * i2.value;
+                break;
+            case 4: //除
+                s.innerText = i1.value / i2.value;
+                break;
+        }
+    }
+
+</script>
+
+</body>
+</html>

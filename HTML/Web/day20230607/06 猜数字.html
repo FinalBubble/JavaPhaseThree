@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<input type="text" placeholder="请输入0-100之间的整数" id="i1">
+<input type="button" value="猜一猜" onclick="f()">
+<div>结果:<span>0</span></div>
+<script>
+    // let x = parseInt(Math.random()*101);
+    // function f(){
+    //     let i1 = document.querySelector("#i1");
+    //     let s = document.querySelector("span");
+    //     if (isNaN(i1.value)) {
+    //         s.innerText = "输入错误!";
+    //         return;
+    //     }
+    //     let guess = i1.value*1;
+    //     if (guess == x){
+    //         s.innerText = "猜对了!";
+    //
+    //     } else if (guess > x){
+    //         s.innerText = "猜大了!";
+    //     } else {
+    //         s.innerText = "猜小了!";
+    //     }
+    // }
+    //0-100随机整数
+    let x = parseInt(Math.random()*101);
+    let count = 0;
+    let i1 = document.querySelector("#i1");
+    let s = document.querySelector("span");
+
+    function f() {
+        count++;
+        if (isNaN(i1.value)) {
+            s.innerText = "输入错误!";
+            return;
+        }
+        if (i1.value > x) {
+            s.innerText = "猜大了!";
+        }else if (i1.value < x) {
+            s.innerText = "猜小了!";
+        }else {
+            s.innerText = "恭喜你第"+count+"次猜对了!";
+            //次数清零
+            count = 0;
+            //生成一个随机整数
+            x = parseInt(Math.random()*101);
+        }
+    }
+</script>
+</body>
+</html>

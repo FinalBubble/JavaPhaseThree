@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<input type="text" id="i1">
+<input type="button" value="添加帅哥" onclick="f(1)">
+<input type="button" value="添加美女" onclick="f(2)">
+<script>
+    let input = document.querySelector("#i1");
+    function f(x){
+        if (isNaN(input.value)){
+            alert("输入错误，请重新输入");
+            return;
+        }
+        let imgName = x == 1 ? "a.jpg" : "b.jpg";
+        for (let i = 0; i < input.value; i++) {
+            let img = document.createElement("img");
+            img.src = imgName
+            document.body.append(img);
+        }
+    }
+</script>
+</body>
+</html>
