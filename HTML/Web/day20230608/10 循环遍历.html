@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div>
+    <table border="1">
+        <caption>国产优秀纯电汽车</caption>
+        <tr>
+            <th>编号</th>
+            <th>名字</th>
+            <th>价格</th>
+            <th>类型</th>
+        </tr>
+        <!-- car代表数组中的每一个对象,i代表遍历的下标值 -->
+        <tr v-for="(car,i) in arr">
+            <td>{{i+1}}</td>
+            <td>{{car.name}}</td>
+            <td>{{car.price}}</td>
+            <td>{{car.type}}</td>
+        </tr>
+    </table>
+    <h1 v-for="car in arr">{{car.name}}->{{car.price}}</h1>
+</div>
+<script src="../js/vue.js"></script>
+<script>
+    let v = new Vue({
+        el: "div",
+        data: {
+            arr:[
+                {name:"极氪001",price:350000,type:"SUV"},
+                {name:"比亚迪汉EV",price:250000,type:"轿车"},
+                {name:"比亚迪宋EV",price:150000,type:"SUV"}
+            ],
+        }
+    })
+</script>
+</body>
+</html>

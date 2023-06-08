@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<!--<div>-->
+<!--    <input type="text" v-text="i1">-->
+<!--    <input type="text" v-text="i2">-->
+<!--    <input type="button" value="加" @click="f(1)">-->
+<!--    <input type="button" value="减" @click="f(2)">-->
+<!--    <input type="button" value="乘" @click="f(3)">-->
+<!--    <input type="button" value="除" @click="f(4)">-->
+<!--    <div>-->
+<!--        结果:{{info}}-->
+<!--    </div>-->
+<!--</div>-->
+<!--<script src="../js/vue.js"></script>-->
+<!--<script>-->
+<!--    let v = new Vue({-->
+<!--        el:"div",-->
+<!--        data:{-->
+<!--            i1:"",-->
+<!--            i2:"",-->
+<!--            info:""-->
+<!--        },-->
+<!--        methods:{-->
+<!--            f:function (x){-->
+<!--                switch (x) {-->
+<!--                    case 1:-->
+<!--                        v.info = v.i1 + v.i2;-->
+<!--                        break;-->
+<!--                    case 2:-->
+<!--                        v.info = v.i1 - v.i2;-->
+<!--                        break;-->
+<!--                    case 3:-->
+<!--                        v.info = v.i1 * v.i2;-->
+<!--                        break;-->
+<!--                    case 4:-->
+<!--                        v.info = v.i1 / v.i2;-->
+<!--                        break;-->
+<!--                }-->
+<!--            }-->
+<!--        }-->
+<!--    })-->
+<!--</script>-->
+<div>
+    <input type="text" v-model="n1">
+    <input type="text" v-model="n2">
+    <input type="button" value="加" @click="f('+')">
+    <input type="button" value="减" @click="f('-')">
+    <input type="button" value="乘" @click="f('*')">
+    <input type="button" value="除" @click="f('/')">
+    <h1>结果:{{result}}</h1>
+</div>
+<script src="../js/vue.js"></script>
+<script>
+    let v = new Vue({
+        el:"div",
+        data:{
+            n1:"",
+            n2:"",
+            result:""
+        },
+        methods:{
+            f(x) {
+                //eval()方法可以将字符串以代码的形式执行
+                v.result = eval(v.n1+x+v.n2);
+            }
+        }
+    })
+
+</script>
+</body>
+</html>

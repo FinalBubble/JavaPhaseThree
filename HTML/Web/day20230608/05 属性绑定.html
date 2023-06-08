@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div>
+    <!-- v-bind属性绑定 -->
+    <input type="text" v-bind:value="msg">
+    <!-- 上面的简写形式 -->
+    <input type="text" :value="msg">
+    <a :href="url">超链接</a>
+    <img :src="src">
+</div>
+<script src="../js/vue.js"></script>
+<script>
+    let v = new Vue({
+        el:"div",
+        data:{
+            msg:"属性绑定测试",
+            url:"https://www.baidu.com",
+            src :"../b.jpg"
+        }
+    })
+</script>
+</body>
+</html>

@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div>
+    <!-- 当需要获取input值的时候使用双向绑定 -->
+    <input type="text" v-model="msg">
+    <h1>{{msg}}</h1>
+    <hr>
+    <input type="radio" v-model="gender" value="男">男
+    <input type="radio" v-model="gender" value="女">女
+    <h1>{{gender}}</h1>
+</div>
+<script src="../js/vue.js"></script>
+<script>
+    let v = new Vue({
+        el: "div",
+        data: {
+            msg: "双向绑定测试",
+            gender: "男"
+        }
+    })
+</script>
+</body>
+</html>

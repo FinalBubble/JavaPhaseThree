@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<table border="1">
+    <caption>个人信息</caption>
+    <tr>
+        <td>照片:</td><td><img id="head_img" src="head.jpg" width="50px" alt=""></td>
+    </tr>
+    <tr><td>名字:</td><td id="name_td">xxx</td></tr>
+    <tr><td>年龄:</td><td id="age_td">xxx</td></tr>
+    <tr>
+        <td>好友:</td>
+        <td><ul id="friend_ul"></ul></td>
+    </tr>
+</table>
+<input type="button" value="请求数据" onclick="f()">
+<script>
+    // let name = document.querySelector("#name_td");
+    // let age = document.querySelector("#age_td");
+    // let img = document.querySelector("#head_img");
+    // let friend_ul = document.querySelector("#friend_ul");
+    // let friends = ["克晶","传奇","成恒"];
+    // function f(){
+    //     name.innerText = "苍老师";
+    //     age.innerText = "50";
+    //     img.src = "a.jpg";
+    //     for (let friend of friends) {
+    //         let li = document.createElement("li");
+    //         li.innerText = friend;
+    //         friend_ul.append(li);
+    //     }
+    // }
+    function f() {
+        //模拟从服务器获取到的数据
+        let person = {name:"苍老师",age:50,url:"a.jpg",friend:["克晶","传奇","成恒"]};
+
+        //获取页面中的元素对象
+        let head_img = document.querySelector("#head_img");
+        let name_td = document.querySelector("#name_td");
+        let age_td = document.querySelector("#age_td");
+        let friend_ul = document.querySelector("#friend_ul");
+
+        //把对象中的数据取出并赋值给页面中的元素对象
+        head_img.src = person.url;
+        name_td.innerText = person.name;
+        age_td.innerText = person.age;
+        //遍历好友数组
+        for (let fn of person.friend) {
+            //创建li
+            let li = document.createElement("li");
+            li.innerText = fn;
+            //把li追加到ul中
+            friend_ul.append(li);
+        }
+    }
+</script>
+</body>
+</html>
