@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="css/eui.css">
+    <style>
+        img {
+            background-color: red;
+        }
+    </style>
+</head>
+
+<body>
+<div id="app">
+    <div class="demo-image">
+        <div class="block" v-for="fit in fits" :key="fit">
+            <span class="demonstration">{{ fit }}</span>
+            <el-image style="width: 100px; height: 100px" :src="url" :fit="fit"></el-image>
+        </div>
+    </div>
+</div>
+</body>
+
+<script src="js/vue.js"></script>
+<script src="js/eui.js"></script>
+<script>
+    new Vue({
+        el: '#app',
+        data: function () {
+            return {
+                fits: ['fill', 'contain', 'cover', 'none', 'scale-down'],
+                url: 'https://fuss10.elemecdn.com/e/5d/4a731a90594a4af544c0c25941171jpeg.jpeg'
+            }
+        }
+    })
+</script>
+
+</html>

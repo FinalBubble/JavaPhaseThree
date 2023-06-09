@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="css/eui.css">
+</head>
+<body>
+<div id="app">
+    <el-dropdown>
+  <span class="el-dropdown-link">
+    下拉菜单<i class="el-icon-arrow-down el-icon--right"></i>
+  </span>
+        <el-dropdown-menu slot="dropdown">
+            <el-dropdown-item>黄金糕</el-dropdown-item>
+            <el-dropdown-item>狮子头</el-dropdown-item>
+            <el-dropdown-item>螺蛳粉</el-dropdown-item>
+            <el-dropdown-item disabled>双皮奶</el-dropdown-item>
+            <el-dropdown-item divided>蚵仔煎</el-dropdown-item>
+        </el-dropdown-menu>
+    </el-dropdown>
+
+    <el-dropdown @command="handleCommand">
+  <span class="el-dropdown-link">
+    选择你的英雄<i class="el-icon-arrow-down el-icon--right"></i>
+  </span>
+        <el-dropdown-menu slot="dropdown">
+            <el-dropdown-item v-for="name in arr" :command="name">{{name}}</el-dropdown-item>
+        </el-dropdown-menu>
+    </el-dropdown>
+    <h1>{{info}}</h1>
+</div>
+</body>
+
+<script src="js/vue.js"></script>
+<script src="js/eui.js"></script>
+<script>
+    let v = new Vue({
+        el: '#app',
+        data: function () {
+            return {
+                arr: ["刘备", "关羽", "张飞"],
+                info: ""
+            }
+        },
+        methods: {
+            handleCommand(command) {
+                v.$message.success(command);
+                v.info = command;
+            }
+        }
+    })
+</script>
+</html>

@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <!-- import CSS -->
+    <link rel="stylesheet" href="css/eui.css">
+</head>
+<body>
+<div id="app">
+    <div>
+        <input type="text" v-model="name" placeholder="姓名">
+        <input type="text" v-model="salary" placeholder="工资">
+        <input type="text" v-model="job" placeholder="工作">
+        <input type="button" value="添加" @click="add()">
+        <el-table
+                :data="arr"
+                style="width: 100%">
+            <el-table-column
+                    type="index"
+                    label="序号"
+                    width="180">
+            </el-table-column>
+            <el-table-column
+                    prop="name"
+                    label="姓名"
+                    width="180">
+            </el-table-column>
+            <el-table-column
+                    prop="salary"
+                    label="工资"
+                    width="180">
+            </el-table-column>
+            <el-table-column
+                    prop="job"
+                    label="职位">
+            </el-table-column>
+            <!-- *************************************** -->
+            <el-table-column label="操作">
+                <template slot-scope="scope">
+<!--                    <el-button-->
+<!--                            size="mini"-->
+<!--                            @click="handleEdit(scope.$index, scope.row)">编辑</el-button>-->
+                    <!-- scope代表每行对应的数据,里面的index代表下标,row代表数组中的对象 -->
+                    <el-popconfirm @confirm="handleDelete(scope.$index,scope.raw)"
+                            title="这是一段内容确定删除吗？"
+                    >
+                        <el-button size="mini" type="danger" slot="reference">删除</el-button>
+                </template>
+            </el-table-column>
+        </el-table>
+    </div>
+
+</div>
+</body>
+<script src="js/vue.js"></script>
+<script src="js/eui.js"></script>
+<script>
+    let v =new Vue({
+        el: '#app',
+        data: function() {
+            return{
+                name:"",
+                salary:"",
+                job:"",
+                arr:[{name:"张三",salary:500,job:"销售"},
+                    {name:"李四",salary:300,job:"人事"}]
+                // arr : []
+            }
+        },
+        methods:{
+            add(){
+                if (v.name.trim() == ""
+                    || v.salary.trim() == ""
+                    || v.job.trim() == ""){
+                    v.$message.error("输入错误");
+                    return;
+                }
+                //往数组中添加一个对象
+                v.arr.push({name:v.name,salary:v.salary,job:v.job});
+                v.name="";
+                v.salary="";
+                v.job="";
+            },
+            del(i){
+                v.arr.splice(i,1);
+            },
+            handleEdit(index, row) {
+                console.log(index, row);
+            },
+            /* index为下标值,row为数组中的对象 */
+            handleDelete(index, row) {
+                v.arr.splice(index,1);
+                console.log(index, row);
+            }
+        }
+    })
+</script>
+
+
+<!--https://element.eleme.cn/#/zh-CN/component-->
+</html>

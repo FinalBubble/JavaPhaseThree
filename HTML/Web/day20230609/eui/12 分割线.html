@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <!-- import CSS -->
+    <link rel="stylesheet" href="css/eui.css">
+</head>
+<body>
+<div id="app">
+    <template>
+        <div>
+            <span>青春是一个短暂的美梦, 当你醒来时, 它早已消失无踪</span>
+            <el-divider content-position="left">少年包青天</el-divider>
+            <span>少量的邪恶足以抵消全部高贵的品质, 害得人声名狼藉</span>
+        </div>
+    </template>
+    <template>
+        <div>
+            <span>首页</span>
+            <el-divider direction="vertical"></el-divider>
+            <span>线下课</span>
+            <el-divider direction="vertical"></el-divider>
+            <span>线 上课</span>
+        </div>
+    </template>
+</div>
+</body>
+<script src="js/vue.js"></script>
+<script src="js/eui.js"></script>
+<script>
+    let v = new Vue({
+        el: '#app',
+        data: function() {
+            return{
+
+            }
+        }
+    })
+</script>
+
+
+<!--https://element.eleme.cn/#/zh-CN/component-->
+</html>

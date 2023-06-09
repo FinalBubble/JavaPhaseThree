@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <!-- import CSS -->
+    <link rel="stylesheet" href="css/eui.css">
+    <style>
+        .c1 {
+            border: 1px solid red;
+            border-radius: 5px;
+        }
+    </style>
+</head>
+<body>
+<div id="app">
+    <el-row>
+        <el-col span="12"><div class="c1">占12</div></el-col>
+        <el-col span="12"><div class="c1">占12</div></el-col>
+    </el-row>
+    <!-- gutter设置间距 -->
+    <el-row :gutter="20">
+        <el-col span="8"><div class="c1">占8</div></el-col>
+        <el-col span="8"><div class="c1">占8</div></el-col>
+        <el-col span="8"><div class="c1">占8</div></el-col>
+    </el-row>
+    <el-row gutter="20">
+        <el-col span="18"><div class="c1">aaa</div></el-col>
+        <el-col span="6"><div class="c1">bbb</div></el-col>
+    </el-row>
+    <h1>分栏偏移</h1>
+    <el-row gutter="20">
+        <el-col span="20" offset="2"><div class="c1">aaa</div></el-col>
+    </el-row>
+
+
+</div>
+</body>
+<script src="js/vue.js"></script>
+<script src="js/eui.js"></script>
+<script>
+    let v = new Vue({
+        el: '#app',
+        data: function() {
+            return{
+
+            }
+        }
+    })
+</script>
+
+
+<!--https://element.eleme.cn/#/zh-CN/component-->
+</html>
