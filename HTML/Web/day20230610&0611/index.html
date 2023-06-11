@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <!-- import CSS -->
+    <link rel="stylesheet" href="css/eui.css">
+    <style>
+        body {
+            font: 18px "Microsoft YaHei UI";
+            margin: 0;
+        }
+
+        header a {
+            /* 去除a标签自带的下划线 */
+            text-decoration: none;
+            color: #6c6c6c;
+        }
+
+        header a:hover {
+            color: #0aa1ed;
+        }
+
+        .el-table .el-table__cell {
+            padding: 0
+        }
+
+        .p_img:hover {
+            position: relative;
+            bottom: 5px;
+            /* 元素的阴影: x偏移值 y偏移值 浓度 范围 颜色 */
+            box-shadow: 0 0 10px 5px #333;
+        }
+    </style>
+</head>
+<body>
+<div id="app">
+    <el-container>
+        <el-header style="padding: 0;height: 150px;">
+            <div style="width: 1200px;margin: 0 auto">
+                <img src="imgs/logo.png" style="width: 300px;vertical-align: middle">
+                <span>
+                    <a href="">首页</a> <el-divider direction="vertical"></el-divider>
+                    <a href="">热点资讯</a> <el-divider direction="vertical"></el-divider>
+                    <a href="">商家入住</a> <el-divider direction="vertical"></el-divider>
+                    <a href="">社会招聘</a> <el-divider direction="vertical"></el-divider>
+                    <a href="">校园招聘</a> <el-divider direction="vertical"></el-divider>
+                    <a href="">帮助中心</a>
+                </span>
+            </div>
+            <div style="width: 100%;height: 60px;background-color: #82c8ec">
+                <el-menu style="width: 1200px;margin: 0 auto"
+                         :default-active="1"
+                         class="el-menu-demo"
+                         mode="horizontal"
+                         @select="handleSelect"
+                         background-color="#82c8ec"
+                         text-color="#fff"
+                         active-text-color="#fff">
+                    <el-menu-item index="1">精彩活动</el-menu-item>
+                    <el-menu-item index="2">当季女装</el-menu-item>
+                    <el-menu-item index="3">品牌男装</el-menu-item>
+                    <el-menu-item index="4">环球美食</el-menu-item>
+                    <el-menu-item index="5">医药健康</el-menu-item>
+                    <el-menu-item index="6">美妆彩妆</el-menu-item>
+                    <el-menu-item index="7">母婴产品</el-menu-item>
+                    <div style="float: right; margin-top: 15px">
+                        <el-input size="mini" placeholder="请输入关键字搜索"></el-input>
+                        <el-button icon="el-icon-search" size="mini"
+                                   style="position: absolute;border: 0;right: 0;top: 16px;background-color: rgba(0,0,0,0)"></el-button>
+                    </div>
+                </el-menu>
+            </div>
+        </el-header>
+        <el-main style="width: 1200px;margin: 0 auto">
+            <el-row gutter="20">
+                <el-col span="18">
+                    <!--      走马灯开始          -->
+                    <el-carousel height="300px">
+                        <el-carousel-item v-for="b in bannerArr">
+                            <img :src="b.url" style="width: 100%;height: 100%">
+                        </el-carousel-item>
+                    </el-carousel>
+                    <!-- 走马灯结束 -->
+                </el-col>
+                <el-col span="6">
+                    <!-- 排行榜开始 -->
+                    <el-card style="height:300px">
+                        <h3><i style="font-width: bold" class="el-icon-trophy"></i> 销量最高</h3>
+                        <el-divider></el-divider>
+                        <el-table
+                                :data="topArr"
+                                style="width: 100%">
+                            <el-table-column type="index" label="排名" width="50px"></el-table-column>
+                            <el-table-column prop="title" label="商品名" width="100">
+                                <template slot-scope="scope">
+                                    <!-- scope.row代表topArr数组中遍历的对象 -->
+                                    <a href="" style="text-decoration: none;color: #333">{{scope.row.title}}</a>
+                                </template>
+                            </el-table-column>
+                            <el-table-column prop="saleCount" label="销量"></el-table-column>
+                        </el-table>
+                    </el-card>
+                    <!-- 排行榜结束 -->
+                </el-col>
+            </el-row>
+            <!-- 商品列表开始 -->
+            <el-row gutter="20">
+                <el-col span="6" v-for="p in productArr">
+                    <el-card >
+                        <div>
+                            <img class="p_img" :src="p.url" width="100%">
+                        </div>
+                        <div>
+                            <p style="font-size: 15px;height: 38px;margin-top: 0">{{p.title}}</p>
+                            <div style="color: #6c6c6c">
+                                <span>￥{{p.price}}</span>
+                                <span style="font-size: 12px;text-decoration: line-through">{{p.oldPrice}}</span>
+                                <span>销量：{{p.saleCount}}件</span>
+                            </div>
+                        </div>
+                    </el-card>
+                </el-col>
+            </el-row>
+            <!-- 商品列表结束 -->
+        </el-main>
+        <el-footer style="padding: 0">
+            <div style="background-image: url('imgs/wave.png');height: 95px;margin-bottom: -30px;"></div>
+            <div style="background-color: #3f3f3f;height: 100px;font-size: 14px;color: #b1b1b1;
+text-align: center;padding: 3px">
+                <p>Copyright © XXXXXXX</p>
+                <p>XXXXXX</p>
+                <p>XXXXXX</p>
+            </div>
+        </el-footer>
+    </el-container>
+
+</div>
+</body>
+<script src="js/vue.js"></script>
+<script src="js/eui.js"></script>
+<script>
+    let v = new Vue({
+        el: '#app',
+        data: function () {
+            return {
+                bannerArr: [{url: "imgs/b1.jpg"},
+                    {url: "imgs/b2.jpg"},
+                    {url: "imgs/b3.jpg"}],
+                topArr: [{title: "小米手机", saleCount: 5000},
+                    {title: "华为手表", saleCount: 4000},
+                    {title: "毛巾", saleCount: 3000},
+                    {title: "双飞燕鼠标", saleCount: 2000},
+                    {title: "耐克篮球", saleCount: 1000},
+                    {title: "阿迪袜子", saleCount: 500}],
+                productArr: [{
+                    title: "森马牛仔裤女宽松慢跑裤运动风2022春季新款显瘦束脚长裤复古",
+                    price: 233,
+                    oldPrice: 598,
+                    url: "imgs/a.jpg",
+                    saleCount: 2342
+                },
+                    {
+                        title: "茵曼马甲连衣裙两件套春季新款娃娃领色织格长袖背心裙套装",
+                        price: 233,
+                        oldPrice: 598,
+                        url: "imgs/b.jpg",
+                        saleCount: 2342
+                    },
+                    {
+                        title: "雪中飞墨绿色短袖t恤女夏2022新款纯棉半袖打底体恤夏季上衣潮ins",
+                        price: 233,
+                        oldPrice: 598,
+                        url: "imgs/c.jpg",
+                        saleCount: 2342
+                    },
+                    {
+                        title: "【佟丽娅同款】鸭鸭明星同款羽绒服2021年冬季新款时尚连帽外套冬",
+                        price: 233,
+                        oldPrice: 598,
+                        url: "imgs/d.jpg",
+                        saleCount: 2342
+                    },
+                    {
+                        title: "BEASTER小恶魔鬼脸明星同款夹克毛绒保暖加厚字母印花宽松外套ins",
+                        price: 233,
+                        oldPrice: 598,
+                        url: "imgs/e.jpg",
+                        saleCount: 2342
+                    },
+                    {
+                        title: "香影毛呢外套女中长款2021年冬季新款气质韩版娃娃领紫色呢子大衣",
+                        price: 233,
+                        oldPrice: 598,
+                        url: "imgs/f.jpg",
+                        saleCount: 2342
+                    },
+                    {
+                        title: "SEMIR森马商场同款打底针织毛衣纯色高领新品显瘦",
+                        price: 233,
+                        oldPrice: 598,
+                        url: "imgs/g.jpg",
+                        saleCount: 2342
+                    },
+                    {
+                        title: "美特斯邦威女MTEE 贺岁系列中长款风衣736598",
+                        price: 233,
+                        oldPrice: 598,
+                        url: "imgs/h.jpg",
+                        saleCount: 2342
+                    },
+                    {
+                        title: "imone2021秋款黑色小西装外套女韩版学生宽松学院风外套jk外套",
+                        price: 233,
+                        oldPrice: 598,
+                        url: "imgs/i.jpg",
+                        saleCount: 2342
+                    },
+                    {
+                        title: "BEASTER 小恶魔明星同款保暖长袖街头潮流连帽卫衣情侣上衣",
+                        price: 233,
+                        oldPrice: 598,
+                        url: "imgs/j.jpg",
+                        saleCount: 2342
+                    },
+                    {
+                        title: "憨厚皇后100%绵羊皮2021秋海宁真皮皮衣女长款修身绵羊皮风衣外",
+                        price: 233,
+                        oldPrice: 598,
+                        url: "imgs/k.jpg",
+                        saleCount: 2342
+                    },
+                    {
+                        title: "美特斯邦威高腰牛仔裤女宽松小脚新款春秋彩色潮流女士牛仔",
+                        price: 233,
+                        oldPrice: 598,
+                        url: "imgs/a.jpg",
+                        saleCount: 2342
+                    }]
+            }
+        }
+    })
+</script>
+
+
+<!--https://element.eleme.cn/#/zh-CN/component-->
+</html>

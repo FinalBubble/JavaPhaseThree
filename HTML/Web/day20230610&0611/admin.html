@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <!-- import CSS -->
+    <link rel="stylesheet" href="css/eui.css">
+    <style>
+        .el-table .cell {
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+<div id="app">
+    <el-container>
+        <el-header style="background-color: #0095d7">
+            <h1 style="font-size: 22px;color:white;">
+                CoolShark商城后台管理系统
+                <span style="float: right;font-size: 15px">
+                    欢迎XXX回来
+                    <a href="">退出登录</a>
+                </span>
+            </h1>
+        </el-header>
+        <el-container>
+            <el-aside width="300px">
+                <!-- 侧边栏开始 -->
+                <el-menu class="el-menu-vertical-demo" @select="menuChange">
+                    <el-submenu index="1">
+                        <template slot="title">
+                            <i class="el-icon-s-flag"></i>分类管理
+                        </template>
+                        <el-menu-item-group>
+                            <el-menu-item index="1-1">分类列表</el-menu-item>
+                            <el-menu-item index="1-2">添加分类</el-menu-item>
+                        </el-menu-item-group>
+                    </el-submenu>
+                    <el-submenu index="2">
+                        <template slot="title">
+                            <i class="el-icon-picture"></i>轮播图管理
+                        </template>
+                        <el-menu-item-group>
+                            <el-menu-item index="2-1">轮播图列表</el-menu-item>
+                            <el-menu-item index="2-2">添加轮播图</el-menu-item>
+                        </el-menu-item-group>
+                    </el-submenu>
+                    <el-submenu index="3">
+                        <template slot="title">
+                            <i class="el-icon-shopping-cart-2"></i>商品管理
+                        </template>
+                        <el-menu-item-group>
+                            <el-menu-item index="3-1">商品列表</el-menu-item>
+                            <el-menu-item index="3-2">添加商品</el-menu-item>
+                        </el-menu-item-group>
+                    </el-submenu>
+                </el-menu>
+                <!-- 侧边栏结束 -->
+            </el-aside>
+            <el-main>
+                <!-- 分类表格开始 -->
+                <el-table v-if="selectedIndex == '1-1'" :data="categoryArr">
+                    <el-table-column type="index" label="编号" width="140px"></el-table-column>
+                    <el-table-column prop="name" label="分类名称"></el-table-column>
+                    <el-table-column label="操作">
+                        <!-- scope代表表格中每行的数据
+                             index表示下标值,row表示数组中的对象 -->
+                        <template slot-scope="scope">
+                            <el-popconfirm @confirm="handleDelete(scope.$index,scope.row)" title="这一段内容确定删除吗?">
+                                <el-button size="mini" type="danger" slot="reference">删除</el-button>
+                            </el-popconfirm>
+                        </template>
+                    </el-table-column>
+                </el-table>
+                <!-- 分类表格结束 -->
+                <!-- 轮播图表格开始 -->
+                <el-table v-if="selectedIndex == '2-1'" :data="bannerArr">
+                    <el-table-column type="index" label="编号" width="140px"></el-table-column>
+                    <el-table-column label="轮播图">
+                        <template slot-scope="scope">
+                            <img :src="scope.row.url" width="150">
+                        </template>
+                    </el-table-column>
+                    <el-table-column label="操作">
+                        <!-- scope代表表格中每行的数据
+                             index表示下标值,row表示数组中的对象 -->
+                        <template slot-scope="scope">
+                            <el-popconfirm @confirm="handleDelete(scope.$index,scope.row)" title="这一段内容确定删除吗?">
+                                <el-button size="mini" type="danger" slot="reference">删除</el-button>
+                            </el-popconfirm>
+                        </template>
+                    </el-table-column>
+                </el-table>
+                <!-- 轮播图表格结束 -->
+                <!-- 商品表格开始 -->
+                <el-table v-if="selectedIndex == '3-1'" :data="productArr">
+                    <el-table-column type="index" label="编号" width="50px"></el-table-column>
+                    <el-table-column prop="title" label="商品标题" width="150px"></el-table-column>
+                    <el-table-column prop="price" label="价格" width="100px"></el-table-column>
+                    <el-table-column prop="saleCount" label="销量" width="100px"></el-table-column>
+                    <el-table-column label="商品图片">
+                        <template slot-scope="scope">
+                            <img :src="scope.row.url" width="150">
+                        </template>
+                    </el-table-column>
+                    <el-table-column label="操作">
+                        <!-- scope代表表格中每行的数据
+                             index表示下标值,row表示数组中的对象 -->
+                        <template slot-scope="scope">
+                            <el-popconfirm @confirm="handleDelete(scope.$index,scope.row)" title="这一段内容确定删除吗?">
+                                <el-button size="mini" type="danger" slot="reference">删除</el-button>
+                            </el-popconfirm>
+                        </template>
+                    </el-table-column>
+                </el-table>
+                <!-- 商品表格结束 -->
+            </el-main>
+        </el-container>
+    </el-container>
+
+</div>
+</body>
+<script src="js/vue.js"></script>
+<script src="js/eui.js"></script>
+<script>
+    let v = new Vue({
+        el: '#app',
+        data: function() {
+            return{
+                selectedIndex:"1-1",
+                categoryArr:[{name:"男装"},{name:"女装"},{name:"手机"},{name:"家电"}],
+                bannerArr:[{url:"imgs/b1.jpg"},
+                    {url:"imgs/b2.jpg"},
+                    {url:"imgs/b3.jpg"}],
+                productArr:[{title:"森马牛仔裤女宽松慢跑裤运动风2022春季新款显瘦束脚长裤复古",price:233,oldPrice:598,url:"imgs/a.jpg",saleCount:2342},
+                    {title:"茵曼马甲连衣裙两件套春季新款娃娃领色织格长袖背心裙套装",price:233,oldPrice:598,url:"imgs/b.jpg",saleCount:2342},
+                    {title:"雪中飞墨绿色短袖t恤女夏2022新款纯棉半袖打底体恤夏季上衣潮ins",price:233,oldPrice:598,url:"imgs/c.jpg",saleCount:2342},
+                    {title:"【佟丽娅同款】鸭鸭明星同款羽绒服2021年冬季新款时尚连帽外套冬",price:233,oldPrice:598,url:"imgs/d.jpg",saleCount:2342},
+                    {title:"BEASTER小恶魔鬼脸明星同款夹克毛绒保暖加厚字母印花宽松外套ins",price:233,oldPrice:598,url:"imgs/e.jpg",saleCount:2342},
+                    {title:"香影毛呢外套女中长款2021年冬季新款气质韩版娃娃领紫色呢子大衣",price:233,oldPrice:598,url:"imgs/f.jpg",saleCount:2342},
+                    {title:"SEMIR森马商场同款打底针织毛衣纯色高领新品显瘦",price:233,oldPrice:598,url:"imgs/g.jpg",saleCount:2342},
+                    {title:"美特斯邦威女MTEE 贺岁系列中长款风衣736598",price:233,oldPrice:598,url:"imgs/h.jpg",saleCount:2342},
+                    {title:"imone2021秋款黑色小西装外套女韩版学生宽松学院风外套jk外套",price:233,oldPrice:598,url:"imgs/i.jpg",saleCount:2342},
+                    {title:"BEASTER 小恶魔明星同款保暖长袖街头潮流连帽卫衣情侣上衣",price:233,oldPrice:598,url:"imgs/j.jpg",saleCount:2342},
+                    {title:"憨厚皇后100%绵羊皮2021秋海宁真皮皮衣女长款修身绵羊皮风衣外",price:233,oldPrice:598,url:"imgs/k.jpg",saleCount:2342},
+                    {title:"美特斯邦威高腰牛仔裤女宽松小脚新款春秋彩色潮流女士牛仔",price:233,oldPrice:598,url:"imgs/a.jpg",saleCount:2342}]
+            }
+        },
+        methods:{
+            menuChange(index) {
+                console.log(index);
+                if (index == "1-2") {
+                    alert("添加分类")
+                }else if (index == "2-2") {
+                    alert("添加轮播图")
+                }else if (index == "3-2") {
+                    alert("添加商品")
+                }else {
+                    v.selectedIndex = index;
+                }
+            }
+        }
+    })
+</script>
+
+
+<!--https://element.eleme.cn/#/zh-CN/component-->
+</html>

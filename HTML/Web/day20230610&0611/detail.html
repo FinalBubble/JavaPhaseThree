@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <!-- import CSS -->
+    <link rel="stylesheet" href="css/eui.css">
+    <style>
+        body {
+            font: 18px "Microsoft YaHei UI";
+            margin: 0;
+        }
+
+        header a {
+            /* 去除a标签自带的下划线 */
+            text-decoration: none;
+            color: #6c6c6c;
+        }
+
+        header a:hover {
+            color: #0aa1ed;
+        }
+
+        .el-table .el-table__cell {
+            padding: 0
+        }
+
+        .p_img:hover {
+            position: relative;
+            bottom: 5px;
+            /* 元素的阴影: x偏移值 y偏移值 浓度 范围 颜色 */
+            box-shadow: 0 0 10px 5px #333;
+        }
+    </style>
+</head>
+<body>
+<div id="app">
+    <el-container>
+        <el-header style="padding: 0;height: 150px;">
+            <div style="width: 1200px;margin: 0 auto">
+                <img src="imgs/logo.png" style="width: 300px;vertical-align: middle">
+                <span>
+                    <a href="">首页</a> <el-divider direction="vertical"></el-divider>
+                    <a href="">热点资讯</a> <el-divider direction="vertical"></el-divider>
+                    <a href="">商家入住</a> <el-divider direction="vertical"></el-divider>
+                    <a href="">社会招聘</a> <el-divider direction="vertical"></el-divider>
+                    <a href="">校园招聘</a> <el-divider direction="vertical"></el-divider>
+                    <a href="">帮助中心</a>
+                </span>
+            </div>
+            <div style="width: 100%;height: 60px;background-color: #82c8ec">
+                <el-menu style="width: 1200px;margin: 0 auto"
+                         :default-active="1"
+                         class="el-menu-demo"
+                         mode="horizontal"
+                         @select="handleSelect"
+                         background-color="#82c8ec"
+                         text-color="#fff"
+                         active-text-color="#fff">
+                    <el-menu-item index="1">精彩活动</el-menu-item>
+                    <el-menu-item index="2">当季女装</el-menu-item>
+                    <el-menu-item index="3">品牌男装</el-menu-item>
+                    <el-menu-item index="4">环球美食</el-menu-item>
+                    <el-menu-item index="5">医药健康</el-menu-item>
+                    <el-menu-item index="6">美妆彩妆</el-menu-item>
+                    <el-menu-item index="7">母婴产品</el-menu-item>
+                    <div style="float: right; margin-top: 15px">
+                        <el-input size="mini" placeholder="请输入关键字搜索"></el-input>
+                        <el-button icon="el-icon-search" size="mini"
+                                   style="position: absolute;border: 0;right: 0;top: 16px;background-color: rgba(0,0,0,0)"></el-button>
+                    </div>
+                </el-menu>
+            </div>
+        </el-header>
+        <el-main style="width: 1200px;margin: 0 auto">
+            <el-row gutter="20">
+                <el-col span="12">
+                    <el-card>
+                        <img :src="product.url" width="100%">
+                    </el-card>
+                </el-col>
+                <el-col span="12">
+                    <p style="font-size: 25px">{{product.title}}</p>
+                    <el-divider></el-divider>
+                    <p style="font-size: 15px;color: #999">
+                        销量:{{product.saleCount}} 浏览量:{{product.viewCount}}
+                    </p>
+                    <p>
+                        ￥{{product.price}}
+                        <span style="font-size: 15px;color: #999">
+                            原价:<s>{{product.oldPrice}}</s>
+                        </span>
+                    </p>
+                    <!-- 二维码开始 -->
+                    <el-row gutter="20" style="text-align: center">
+                        <el-col span="8">
+                            <el-card>
+                                <img src="imgs/ewm.jpg" width="100%">
+                            </el-card>
+                            <span>扫码购买商品</span>
+                        </el-col>
+                        <el-col span="8">
+                            <el-card>
+                                <img src="imgs/ewm.jpg" width="100%">
+                            </el-card>
+                            <span>扫码关注公众号</span>
+                        </el-col>
+                        <el-col span="8">
+                            <el-card>
+                                <img src="imgs/ewm.jpg" width="100%">
+                            </el-card>
+                            <span>扫码下载APP</span>
+                        </el-col>
+                    </el-row>
+                    <!-- 二维码结束 -->
+                </el-col>
+            </el-row>
+
+    </el-main>
+    <el-footer style="padding: 0">
+        <div style="background-image: url('imgs/wave.png');height: 95px;margin-bottom: -30px;"></div>
+        <div style="background-color: #3f3f3f;height: 100px;font-size: 14px;color: #b1b1b1;
+text-align: center;padding: 3px">
+            <p>Copyright © XXXXXXX</p>
+            <p>XXXXXX</p>
+            <p>XXXXXX</p>
+        </div>
+    </el-footer>
+    </el-container>
+
+</div>
+</body>
+<script src="js/vue.js"></script>
+<script src="js/eui.js"></script>
+<script>
+    let v = new Vue({
+        el: '#app',
+        data: function () {
+            return {
+                product: {
+                    title: "森马牛仔裤女宽松慢跑裤运动风2022春季新款显瘦束脚长裤复古",
+                    price: 233, oldPrice: 598, url: "imgs/a.jpg", saleCount: 2342, viewCount: 999
+                }
+            }
+        }
+    })
+</script>
+
+
+<!--https://element.eleme.cn/#/zh-CN/component-->
+</html>
