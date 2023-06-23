@@ -172,3 +172,21 @@ static目录下创建js目录 , 将axios.min.js和vue.js放入此目录中
   - 应用场景 : 保存登录状态 , 涉及敏感数据 , 因为数据保存在服务器会更安全
 
  <img src="F:/BaiduNetdisk_Downloads/课程源码/javavn2206-master/06第三阶段笔记/06第三阶段笔记/企业微信截图_16705848965284.png" alt="img" style="zoom: 50%;" />
+
+#### 过滤器Filter
+
+​		所有业务都需要登录后才可以执行 , 那么如果每个controller中都添加验证登录代码会使项目变得臃肿 , 使用放滤器可以统一的进行验证处理
+
+ <img src="F:/BaiduNetdisk_Downloads/课程源码/javavn2206-master/06第三阶段笔记/06第三阶段笔记/企业微信截图_16711897245833.png" alt="img" style="zoom: 67%;" />
+
+- 作用 : 过滤器里面的代码会在执行Controller代码之前和执行完Controller代码之后执行 , 这样的话可以将多个Controller中重复的操作(比如验证是否登录)写在过滤器里面 , 这样可以起到代码重用的作用
+
+#### urlPatterns的配置方式
+
+1. 精确匹配   /admin.html  /insertProduct.html
+
+2. 后缀匹配  *.jpg   *.png   *.html  
+
+3. 路径匹配:  /product/*   /user/*  
+
+4. 全部匹配:  /*  (客户端发出的所有请求都会被过滤器拦截)
